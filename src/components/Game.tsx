@@ -3,142 +3,369 @@
 // while loop tracks state of 9 variable tied to areas on screen
 import { useEffect, useState } from 'react';
 
+
 function Game () {
     const [gameState, setGameState] = useState<boolean>(false); // Boolean for the state of the game
     const [playerTurn, setPlayerTurn] = useState<number>(1); // Counter for player turn logic 
 
-    const [clicked1, setClicked1] = useState<boolean>(false); // Boolean for 1st box
-    const [clicked2, setClicked2] = useState<boolean>(false); // Boolean for 2nd box
-    const [clicked3, setClicked3] = useState<boolean>(false); // Boolean for 3rd box
-    const [clicked4, setClicked4] = useState<boolean>(false); // Boolean for 4th box
-    const [clicked5, setClicked5] = useState<boolean>(false); // Boolean for 5th box
-    const [clicked6, setClicked6] = useState<boolean>(false); // Boolean for 6th box
-    const [clicked7, setClicked7] = useState<boolean>(false); // Boolean for 7th box
-    const [clicked8, setClicked8] = useState<boolean>(false); // Boolean for 8th box
-    const [clicked9, setClicked9] = useState<boolean>(false); // Boolean for 9th box
+    const [clickedArray, setClickedArray] = useState<boolean[]>(Array(9).fill(false)); // 3x3 Boolean array for tracking and limiting clicks on boxes
+    const [board, setBoard] = useState<string[]>(Array(9).fill('')); // 3x3 String array for inserting X's and O's into jsx
+    const [scoreBoard, setScoreBoard] = useState<number[]>(Array(9).fill(0)); // 3x3 scoreboard/number array for tracking score
+
+    const [P1winner, setP1Winner] = useState<boolean>(false); // Boolean used to track winner
+    const [P2winner, setP2Winner] = useState<boolean>(false); // Boolean used to track winner
 
 
     // Handles the click event on the start button:
     const handleStart: React.MouseEventHandler<HTMLButtonElement> = (event) => {
         setGameState(true)
       };
-    
+
     // Handles click event on 1st box
-    const clickTurn1 = (event: React.MouseEvent<HTMLTableCellElement>) => {
-        if (gameState && !clicked1) {
+    const clickBox1 = (index: number) => {
+        if (gameState && !clickedArray[0] && board[index] === '') {
             setPlayerTurn(playerTurn + 1);
-            setClicked1(true);
-        }
+            setClickedArray((prevClicked) => {
+                const newClickedArray = [...prevClicked];
+                newClickedArray[index] = false
+                return newClickedArray;
+            });  
+            setBoard((prevBoard) => {
+                const newBoard = [...prevBoard];
+                newBoard[index] = playerTurn % 2 === 0 ? "X" : "O";
+                return newBoard;
+            });
+            setScoreBoard((prevScoreBoard) => {
+                const newScoreBoard = [...prevScoreBoard];
+                if (playerTurn % 2 === 0) {
+                    newScoreBoard[index] = 2
+                } else {
+                    newScoreBoard[index] = 1
+                }
+                return newScoreBoard;
+            });  
+        } 
     }
-
     // Handles click event on 2nd box
-    const clickTurn2 = (event: React.MouseEvent<HTMLTableCellElement>) => {
-        if (gameState && !clicked2) {
+    const clickBox2 = (index: number) => {
+        if (gameState && !clickedArray[1] && board[index] === '') {
             setPlayerTurn(playerTurn + 1);
-            setClicked2(true);
+            setClickedArray((prevClicked) => {
+                const newClickedArray = [...prevClicked];
+                newClickedArray[index] = false
+                return newClickedArray;
+            });  
+            setBoard((prevBoard) => {
+                const newBoard = [...prevBoard];
+                newBoard[index] = playerTurn % 2 === 0 ? "X" : "O";
+                return newBoard;
+            });   
+            setScoreBoard((prevScoreBoard) => {
+                const newScoreBoard = [...prevScoreBoard];
+                if (playerTurn % 2 === 0) {
+                    newScoreBoard[index] = 2
+                } else {
+                    newScoreBoard[index] = 1
+                }
+                return newScoreBoard;
+            });  
         }
     }
-
     // Handles click event on 3rd box
-    const clickTurn3 = (event: React.MouseEvent<HTMLTableCellElement>) => {
-        if (gameState && !clicked3) {
+    const clickBox3 = (index: number) => {
+        if (gameState && !clickedArray[2] && board[index] === '') {
             setPlayerTurn(playerTurn + 1);
-            setClicked3(true);
+            setClickedArray((prevClicked) => {
+                const newClickedArray = [...prevClicked];
+                newClickedArray[index] = false
+                return newClickedArray;
+            });  
+            setBoard((prevBoard) => {
+                const newBoard = [...prevBoard];
+                newBoard[index] = playerTurn % 2 === 0 ? "X" : "O";
+                return newBoard;
+            });
+            setScoreBoard((prevScoreBoard) => {
+                const newScoreBoard = [...prevScoreBoard];
+                if (playerTurn % 2 === 0) {
+                    newScoreBoard[index] = 2
+                } else {
+                    newScoreBoard[index] = 1
+                }
+                return newScoreBoard;
+            });  
         }
     }
-
     // Handles click event on 4th box
-    const clickTurn4 = (event: React.MouseEvent<HTMLTableCellElement>) => {
-        if (gameState && !clicked4) {
+    const clickBox4 = (index: number) => {
+        if (gameState && !clickedArray[3] && board[index] === '') {
             setPlayerTurn(playerTurn + 1);
-            setClicked4(true);
+            setClickedArray((prevClicked) => {
+                const newClickedArray = [...prevClicked];
+                newClickedArray[index] = false
+                return newClickedArray;
+            });  
+            setBoard((prevBoard) => {
+                const newBoard = [...prevBoard];
+                newBoard[index] = playerTurn % 2 === 0 ? "X" : "O";
+                return newBoard;
+            });
+            setScoreBoard((prevScoreBoard) => {
+                const newScoreBoard = [...prevScoreBoard];
+                if (playerTurn % 2 === 0) {
+                    newScoreBoard[index] = 2
+                } else {
+                    newScoreBoard[index] = 1
+                }
+                return newScoreBoard;
+            });            
         }
     }
-
     // Handles click event on 5th box
-    const clickTurn5 = (event: React.MouseEvent<HTMLTableCellElement>) => {
-        if (gameState && !clicked5) {
+    const clickBox5 = (index: number) => {
+        if (gameState && !clickedArray[4] && board[index] === '') {
             setPlayerTurn(playerTurn + 1);
-            setClicked5(true);
+            setClickedArray((prevClicked) => {
+                const newClickedArray = [...prevClicked];
+                newClickedArray[index] = false
+                return newClickedArray;
+            });  
+            setBoard((prevBoard) => {
+                const newBoard = [...prevBoard];
+                newBoard[index] = playerTurn % 2 === 0 ? "X" : "O";
+                return newBoard;
+            });
+            setScoreBoard((prevScoreBoard) => {
+                const newScoreBoard = [...prevScoreBoard];
+                if (playerTurn % 2 === 0) {
+                    newScoreBoard[index] = 2
+                } else {
+                    newScoreBoard[index] = 1
+                }
+                return newScoreBoard;
+            });             
         }
     }
-
     // Handles click event on 6th box
-    const clickTurn6 = (event: React.MouseEvent<HTMLTableCellElement>) => {
-        if (gameState && !clicked6) {
+    const clickBox6 = (index: number) => {
+        if (gameState && !clickedArray[5]  && board[index] === '') {
             setPlayerTurn(playerTurn + 1);
-            setClicked6(true);
+            setClickedArray((prevClicked) => {
+                const newClickedArray = [...prevClicked];
+                newClickedArray[index] = false
+                return newClickedArray;
+            });  
+            setBoard((prevBoard) => {
+                const newBoard = [...prevBoard];
+                newBoard[index] = playerTurn % 2 === 0 ? "X" : "O";
+                return newBoard;
+            }); 
+            setScoreBoard((prevScoreBoard) => {
+                const newScoreBoard = [...prevScoreBoard];
+                if (playerTurn % 2 === 0) {
+                    newScoreBoard[index] = 2
+                } else {
+                    newScoreBoard[index] = 1
+                }
+                return newScoreBoard;
+            });           
         }
     }
-
     // Handles click event on 7th box
-    const clickTurn7 = (event: React.MouseEvent<HTMLTableCellElement>) => {
-        if (gameState && !clicked7) {
+    const clickBox7 = (index: number) => {
+        if (gameState && !clickedArray[6]  && board[index] === '') {
             setPlayerTurn(playerTurn + 1);
-            setClicked7(true);
+            setClickedArray((prevClicked) => {
+                const newClickedArray = [...prevClicked];
+                newClickedArray[index] = false
+                return newClickedArray;
+            });  
+            setBoard((prevBoard) => {
+                const newBoard = [...prevBoard];
+                newBoard[index] = playerTurn % 2 === 0 ? "X" : "O";
+                return newBoard;
+            });
+            setScoreBoard((prevScoreBoard) => {
+                const newScoreBoard = [...prevScoreBoard];
+                if (playerTurn % 2 === 0) {
+                    newScoreBoard[index] = 2
+                } else {
+                    newScoreBoard[index] = 1
+                }
+                return newScoreBoard;
+            });             
         }
     }
-
     // Handles click event on 8th box
-    const clickTurn8 = (event: React.MouseEvent<HTMLTableCellElement>) => {
-        if (gameState && !clicked8) {
+    const clickBox8 = (index: number) => {
+        if (gameState && !clickedArray[7]  && board[index] === '') {
             setPlayerTurn(playerTurn + 1);
-            setClicked8(true);
+            setClickedArray((prevClicked) => {
+                const newClickedArray = [...prevClicked];
+                newClickedArray[index] = false
+                return newClickedArray;
+            });  
+            setBoard((prevBoard) => {
+                const newBoard = [...prevBoard];
+                newBoard[index] = playerTurn % 2 === 0 ? "X" : "O";
+                return newBoard;
+            });  
+            setScoreBoard((prevScoreBoard) => {
+                const newScoreBoard = [...prevScoreBoard];
+                if (playerTurn % 2 === 0) {
+                    newScoreBoard[index] = 2
+                } else {
+                    newScoreBoard[index] = 1
+                }
+                return newScoreBoard;
+            });           
         }
     }
-
     // Handles click event on 9th box
-    const clickTurn9 = (event: React.MouseEvent<HTMLTableCellElement>) => {
-        if (gameState && !clicked9) {
+    const clickBox9 = (index: number) => {
+        if (gameState && !clickedArray[8]  && board[index] === '') {
             setPlayerTurn(playerTurn + 1);
-            setClicked9(true);
+            setClickedArray((prevClicked) => {
+                const newClickedArray = [...prevClicked];
+                newClickedArray[index] = false
+                return newClickedArray;
+            });  
+            setBoard((prevBoard) => {
+                const newBoard = [...prevBoard];
+                newBoard[index] = playerTurn % 2 === 0 ? "X" : "O";
+                return newBoard;
+            });     
+            setScoreBoard((prevScoreBoard) => {
+                const newScoreBoard = [...prevScoreBoard];
+                if (playerTurn % 2 === 0) {
+                    newScoreBoard[index] = 2
+                } else {
+                    newScoreBoard[index] = 1
+                }
+                return newScoreBoard;
+            });        
         }
     }
 
-      useEffect(() => {
-        if (playerTurn === 10) {
-            console.log('the game ended')
-            setPlayerTurn(0)
-            setGameState(false)
-        }   
-    }, [playerTurn]);     
+    //Resets game after 9 turns
+    useEffect(() => {
+        console.log(playerTurn)
+        if (playerTurn === 11) {
+            reset();
+        }
+    }, [playerTurn]);
+    
+    useEffect(() => {
+        // console.log()
+        if (scoreBoard[0] === 2 && scoreBoard[1] === 2 && scoreBoard[2] === 2) {
+            setP2Winner(true);
+        } else if (scoreBoard[0] === 1 && scoreBoard[1] === 1 && scoreBoard[2] === 1) {
+            setP1Winner(true);
+        } else if (scoreBoard[3] === 2 && scoreBoard[4] === 2 && scoreBoard[5] === 2) {
+            setP2Winner(true);
+        } else if (scoreBoard[3] === 1 && scoreBoard[4] === 1 && scoreBoard[5] === 1) {
+            setP1Winner(true);
+        } else if (scoreBoard[6] === 2 && scoreBoard[7] === 2 && scoreBoard[8] === 2) {
+            setP2Winner(true);
+        } else if (scoreBoard[6] === 1 && scoreBoard[7] === 1 && scoreBoard[8] === 1) {
+            setP1Winner(true);
+        } else if (scoreBoard[0] === 2 && scoreBoard[3] === 2 && scoreBoard[6] === 2) {
+            setP2Winner(true);
+        } else if (scoreBoard[0] === 1 && scoreBoard[3] === 1 && scoreBoard[6] === 1) {
+            setP1Winner(true);
+        } else if (scoreBoard[1] === 2 && scoreBoard[4] === 2 && scoreBoard[7] === 2) {
+            setP2Winner(true);
+        } else if (scoreBoard[1] === 1 && scoreBoard[4] === 1 && scoreBoard[7] === 1) {
+            setP1Winner(true);
+        } else if (scoreBoard[2] === 2 && scoreBoard[5] === 2 && scoreBoard[8] === 2) {
+            setP2Winner(true);
+        } else if (scoreBoard[2] === 1 && scoreBoard[5] === 1 && scoreBoard[8] === 1) {
+            setP1Winner(true);
+        } else if (scoreBoard[0] === 2 && scoreBoard[4] === 2 && scoreBoard[8] === 2) {
+            setP2Winner(true);
+        } else if (scoreBoard[0] === 1 && scoreBoard[4] === 1 && scoreBoard[8] === 1) {
+            setP1Winner(true);
+        } else if (scoreBoard[2] === 2 && scoreBoard[4] === 2 && scoreBoard[6] === 2) {
+            setP2Winner(true);
+        } else if (scoreBoard[2] === 1 && scoreBoard[4] === 1 && scoreBoard[6] === 1) {
+            setP1Winner(true);
+        }
+    }, [scoreBoard]);  
+
+    //Clears board of previous game's value, allowing for players to review their final standing before reset
+    const clearBoard: React.MouseEventHandler<HTMLButtonElement> = () => {
+        reset();
+    };
+
+    const reset = () => {
+        console.log('the game ended')
+        setPlayerTurn(1);
+        setGameState(false);
+        setBoard(Array(9).fill(''));
+        setClickedArray(Array(9).fill(false));
+        setScoreBoard(Array(9).fill(0));
+        setP1Winner(false);
+        setP2Winner(false);
+    }
 
     return (
         <>
             <button onClick={handleStart}>
-                Start
+                Play
             </button>
             <div>
-            {gameState ? (
-                playerTurn % 2 === 0 ? (
-                    <h3>Player 2's Turn!</h3>
+                {gameState ? (
+                    playerTurn % 2 === 0? (
+                        <h3>Player 2's Turn!</h3>
+                    ) : (
+                        <h3>Player 1's Turn!</h3>
+                    )
                 ) : (
-                    <h3>Player 1's Turn!</h3>
-                )
-            ) : (
-                <></>
-            )}
+                    <></>
+                )}
             </div>
             
             <table>
                 <tbody>
                 <tr>
-                    <td onClick={(event) => {clickTurn1(event); setClicked1(true)}} >boxA1</td>
-                    <td onClick={(event) => {clickTurn2(event); setClicked2(true)}} >boxA2</td>
-                    <td onClick={(event) => {clickTurn3(event); setClicked3(true)}} >boxA3</td>
+                    <td onClick={(event) => {clickBox1(0)}} >A1 {board[0]}</td>
+                    <td onClick={(event) => {clickBox2(1)}} >A2 {board[1]}</td>
+                    <td onClick={(event) => {clickBox3(2)}} >A3 {board[2]}</td>
                 </tr>
                 <tr>
-                    <td onClick={(event) => {clickTurn4(event); setClicked4(true)}} >boxB1</td>
-                    <td onClick={(event) => {clickTurn5(event); setClicked5(true)}} >boxB2</td>
-                    <td onClick={(event) => {clickTurn6(event); setClicked6(true)}} >boxB3</td>
+                    <td onClick={(event) => {clickBox4(3)}} >B1 {board[3]}</td>
+                    <td onClick={(event) => {clickBox5(4)}} >B2 {board[4]}</td>
+                    <td onClick={(event) => {clickBox6(5)}} >B3 {board[5]}</td>
                 </tr>
                 <tr>
-                    <td onClick={(event) => {clickTurn7(event); setClicked7(true)}} >boxC1</td>
-                    <td onClick={(event) => {clickTurn8(event); setClicked8(true)}} >boxC2</td>
-                    <td onClick={(event) => {clickTurn9(event); setClicked9(true)}} >boxC3</td>
+                    <td onClick={(event) => {clickBox7(6)}} >C1 {board[6]}</td>
+                    <td onClick={(event) => {clickBox8(7)}} >C2 {board[7]}</td>
+                    <td onClick={(event) => {clickBox9(8)}} >C3 {board[8]}</td>
                 </tr>
                 </tbody>
             </table>
+            <div>
+                {P1winner ? (
+                        <h3>Player 1 Wins!</h3>
+                    ) : (
+                        <></>
+                    )
+                }
+                {P2winner ? (
+                        <h3>Player 2 Wins!</h3>
+                    ) : (
+                        <></>
+                    )
+                }
+            </div>
+            <div>
+                {playerTurn === 10 || P1winner === true || P2winner === true ? (
+                    <button onClick={clearBoard}>
+                        Clear Board
+                    </button>
+                    ) : (<></>)
+                }
+            </div>
         </>
     )
 }
