@@ -268,14 +268,6 @@ function Game () {
         }
     }
 
-    //Resets game:
-    // useEffect(() => {
-    //     console.log('player turn is', playerTurn)
-    //     if (playerTurn === 12) {
-    //         reset();
-    //     }
-    // }, [playerTurn]);
-
     function randomSearch(array, target) {
         while (true) {
           const randomIndex = Math.floor(Math.random() * array.length);
@@ -425,26 +417,30 @@ function Game () {
         }
     }, [scoreBoard]);  
 
-    // useEffect(() => {
-    //     if (P1winner === true ) {
-    //         setPlayerTurn(1);
-    //         setGameState1(false);
-    //     }
-    // }, [P1winner]); 
+    useEffect(() => {
+        if (P1winner === true) {
+            setGameState1(false);
+            setGameState2(false);
+            setClickedArray(Array(9).fill(true));
+        }
+    }, [P1winner]); 
 
-    // useEffect(() => {
-    //     if (compWinner === true ) {
-    //         setPlayerTurn(1);
-    //         setGameState1(false);
-    //     }
-    // }, [compWinner]); 
+    useEffect(() => {
+        if (P2winner === true) {
+            setGameState1(false);
+            setGameState2(false);
+            setClickedArray(Array(9).fill(true));
+        }
+    }, [P2winner]); 
 
-    // useEffect(() => {
-    //     if (clickedArray[0-9] === true ) {
-    //         setPlayerTurn(1);
-    //         setGameState1(false);
-    //     }
-    // }, [clickedArray]); 
+    useEffect(() => {
+        if (compWinner === true) {
+            setGameState1(false);
+            setGameState2(false);
+            setClickedArray(Array(9).fill(true));
+        }
+    }, [compWinner]); 
+
 
     //Clears board of previous game's value, allowing for players to review their final standing before reset
     const clearBoard: React.MouseEventHandler<HTMLButtonElement> = () => {
