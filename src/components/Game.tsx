@@ -1,8 +1,4 @@
-// use state for button to start game
-// game starts with useffect with condition based on previous state of start button, enacts while loop for game logic, enacts player turn function for tracking turns
-// while loop tracks state of 9 variable tied to areas on screen
 import { useEffect, useState } from 'react';
-
 
 function Game () {
     const [gameState1, setGameState1] = useState<boolean>(false); // Boolean for the state of the single player game
@@ -268,6 +264,7 @@ function Game () {
         }
     }
 
+    // Random search algo for computer turns
     function randomSearch(array, target) {
         while (true) {
           const randomIndex = Math.floor(Math.random() * array.length);
@@ -277,10 +274,11 @@ function Game () {
         }
       }
     
-    // Singe player game logic was added second and uses a while loop with a nested switch and additional functionality
+    // Singe player game logic was added second and uses similar logic with a settimeout and the random search algo
     useEffect (() => {
         if (gameState1 === true && playerTurn === 2) {
                 const randomIndex = randomSearch(board, '');
+                setTimeout(() => {
                 if (board[randomIndex] !== 'X' && board[randomIndex] !== 'O')
                     setClickedArray((prevClicked) => {
                         const newClickedArray = [...prevClicked];
@@ -298,8 +296,10 @@ function Game () {
                         return newScoreBoard;
                     });  
                     setPlayerTurn(playerTurn + 1);
+                }, 1000);
         } else if (gameState1 === true && playerTurn === 4) {
                 const randomIndex = randomSearch(board, '');
+                setTimeout(() => {
                 if (board[randomIndex] !== 'X' && board[randomIndex] !== 'O')
                     setClickedArray((prevClicked) => {
                         const newClickedArray = [...prevClicked];
@@ -318,8 +318,10 @@ function Game () {
                         return newScoreBoard;
                     });  
                     setPlayerTurn(playerTurn + 1);
+                }, 1000);
         } else if (gameState1 === true && playerTurn === 6) {
                 const randomIndex = randomSearch(board, '');
+                setTimeout(() => {
                 if (board[randomIndex] !== 'X' && board[randomIndex] !== 'O')
                     setClickedArray((prevClicked) => {
                         const newClickedArray = [...prevClicked];
@@ -338,8 +340,10 @@ function Game () {
                         return newScoreBoard;
                     });  
                     setPlayerTurn(playerTurn + 1);
+                }, 1000);
         } else if (gameState1 === true && playerTurn === 8) {
                 const randomIndex = randomSearch(board, '');
+                setTimeout(() => {
                 if (board[randomIndex] !== 'X' && board[randomIndex] !== 'O')
                     setClickedArray((prevClicked) => {
                         const newClickedArray = [...prevClicked];
@@ -358,6 +362,7 @@ function Game () {
                         return newScoreBoard;
                     });  
                     setPlayerTurn(playerTurn + 1);
+                }, 1000);
         } 
     }, [playerTurn]) 
 
@@ -417,6 +422,7 @@ function Game () {
         }
     }, [scoreBoard]);  
 
+    // Condition for when P1 wins
     useEffect(() => {
         if (P1winner === true) {
             setGameState1(false);
@@ -425,6 +431,7 @@ function Game () {
         }
     }, [P1winner]); 
 
+    // Condition for when P2 wins
     useEffect(() => {
         if (P2winner === true) {
             setGameState1(false);
@@ -433,6 +440,7 @@ function Game () {
         }
     }, [P2winner]); 
 
+    // Condition for when computer wins
     useEffect(() => {
         if (compWinner === true) {
             setGameState1(false);
@@ -447,6 +455,7 @@ function Game () {
         reset();
     };
 
+    // Resets state for the clear button
     const reset = () => {
         console.log('the game ended');
         setGameState1(false);
@@ -462,80 +471,77 @@ function Game () {
 
     return (
         <>
-            <button onClick={handleStart1}>
-                1-Player Game
-            </button>
-            <button onClick={handleStart2}>
-                2-Player Game
-            </button>
-            <div>
-                {gameState2 ? (
-                    playerTurn % 2 === 0? (
-                        <h3>Player 2's Turn!</h3>
-                    ) : (
-                        <h3>Player 1's Turn!</h3>
-                    )
+        <div className='buttons'>
+            <button className='button' onClick={handleStart1}>1-Player Game</button>
+            <button className='button' onClick={handleStart2}>2-Player Game</button>
+        </div>
+        <div className='turn'>
+            {gameState2 ? (
+                playerTurn % 2 === 0? (
+                    <h4>Player 2's Turn!</h4>
+                ) : (
+                    <h4>Player 1's Turn!</h4>
+                )
+            ) : (
+                <></>
+            )}
+            {gameState1 ? (
+                playerTurn % 2 === 0? (
+                    <h4>Computer's Turn</h4>
+                ) : (
+                    <h4>Your Turn!</h4>
+                )
+            ) : (
+                <></>
+            )}
+        </div>
+        <table className='table'>
+            <tbody>
+            <tr>
+                <td className='td1' onClick={(event) => {clickBox1(0)}} > {board[0]}</td>
+                <td className='td1' onClick={(event) => {clickBox2(1)}} > {board[1]}</td>
+                <td className='td2' onClick={(event) => {clickBox3(2)}} > {board[2]}</td>
+            </tr>
+            <tr>
+                <td className='td1' onClick={(event) => {clickBox4(3)}} > {board[3]}</td>
+                <td className='td1' onClick={(event) => {clickBox5(4)}} > {board[4]}</td>
+                <td className='td2' onClick={(event) => {clickBox6(5)}} > {board[5]}</td>
+            </tr>
+            <tr>
+                <td className='td3' onClick={(event) => {clickBox7(6)}} > {board[6]}</td>
+                <td className='td3' onClick={(event) => {clickBox8(7)}} > {board[7]}</td>
+                <td className='td4' onClick={(event) => {clickBox9(8)}} > {board[8]}</td>
+            </tr>
+            </tbody>
+        </table>
+        <div className='winner'>
+            {P1winner ? (
+                    <h3>Player 1 Wins!</h3>
                 ) : (
                     <></>
-                )}
-                {gameState1 ? (
-                    playerTurn % 2 === 0? (
-                        <h3>Computer's Turn</h3>
-                    ) : (
-                        <h3>Your Turn!</h3>
-                    )
+                )
+            }
+            {P2winner ? (
+                    <h3>Player 2 Wins!</h3>
                 ) : (
                     <></>
-                )}
-            </div>
-            
-            <table>
-                <tbody>
-                <tr>
-                    <td onClick={(event) => {clickBox1(0)}} >A1 {board[0]}</td>
-                    <td onClick={(event) => {clickBox2(1)}} >A2 {board[1]}</td>
-                    <td onClick={(event) => {clickBox3(2)}} >A3 {board[2]}</td>
-                </tr>
-                <tr>
-                    <td onClick={(event) => {clickBox4(3)}} >B1 {board[3]}</td>
-                    <td onClick={(event) => {clickBox5(4)}} >B2 {board[4]}</td>
-                    <td onClick={(event) => {clickBox6(5)}} >B3 {board[5]}</td>
-                </tr>
-                <tr>
-                    <td onClick={(event) => {clickBox7(6)}} >C1 {board[6]}</td>
-                    <td onClick={(event) => {clickBox8(7)}} >C2 {board[7]}</td>
-                    <td onClick={(event) => {clickBox9(8)}} >C3 {board[8]}</td>
-                </tr>
-                </tbody>
-            </table>
-            <div>
-                {P1winner ? (
-                        <h3>Player 1 Wins!</h3>
-                    ) : (
-                        <></>
-                    )
-                }
-                {P2winner ? (
-                        <h3>Player 2 Wins!</h3>
-                    ) : (
-                        <></>
-                    )
-                }
-                {compWinner ? (
-                        <h3>Computer Wins!</h3>
-                    ) : (
-                        <></>
-                    )
-                }
-            </div>
-            <div>
-                {playerTurn === 10 || P1winner === true || P2winner === true || compWinner === true ? (
-                    <button onClick={clearBoard}>
-                        Clear Board
-                    </button>
-                    ) : (<></>)
-                }
-            </div>
+                )
+            }
+            {compWinner ? (
+                    <h3>Computer Wins!</h3>
+                ) : (
+                    <></>
+                )
+            }
+        </div>
+        <div>
+            {playerTurn === 10 || P1winner === true || P2winner === true || compWinner === true ? (
+                <button className='button' onClick={clearBoard}>
+                    Clear Board
+                </button>
+                ) : (<></>)
+            }
+        </div>
         </>
     )
 }

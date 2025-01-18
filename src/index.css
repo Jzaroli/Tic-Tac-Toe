@@ -1,14 +1,60 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+.root {
+  @apply font-serif flex flex-col justify-center
+}
+.h1 {
+  @apply mb-3 text-5xl font-extrabold z-10
+}
+.game {
+  @apply flex flex-col justify-center z-10 bg-white
+}
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.turn{
+  @apply h-10 m-2 text-2xl font-semibold
+}
+
+.table {
+  @apply table-fixed 
+}
+.td1 {
+  @apply border-r border-b h-20 w-10 text-xl
+}
+.td2 {
+  @apply border-b h-20 w-10 text-xl
+}
+.td3 {
+  @apply border-r h-20 w-10 text-xl
+}
+.td4{
+  @apply text-xl
+}
+
+.winner {
+  @apply h-10 mt-5 text-3xl font-bold
+}
+
+.buttons {
+  @apply flex flex-row justify-center mt-3
+}
+.button {
+  @apply font-semibold bg-transparent text-blue-600 py-2 px-4 border rounded border-blue-500 m-4
+}
+.button:hover {
+  @apply text-white bg-blue-500 border-transparent
+}
+
+.footer {
+  @apply flex flex-row justify-center w-full m-2 font-semibold absolute bottom-0 left-0  text-gray-800 z-0
+}
+.p {
+  @apply m-1
+}
+.a {
+  @apply m-1 underline
+}
+a:hover {
+  @apply  text-blue-600
 }
