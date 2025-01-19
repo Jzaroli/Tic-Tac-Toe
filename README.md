@@ -4,7 +4,7 @@
 This is the classic Tic Tac Toe game, built on React and Tailwind. There is both a single player and a two player option. The idea for the single player version of the game came after the two player version was built, so it utilize some of the functionality of the two player game. Interesting learnings came when building the single player version, including using a random search alogrithm, avoiding overlaps and improving UX during and after the game finishes.
 
 ## Usage
-Pick a game mode and have fun. The design is responsive for both mobile and web browser play.
+Pick a game mode and have fun. The design is responsive for both mobile and web browser play. [Play Here](https://johann-zaroli-tictactoe.netlify.app/)
 
 ## Credits & How to Contribute
 This app was created by Johann Zaroli. Please contact me on GitHub at Jzaroli with any questions or requests.
